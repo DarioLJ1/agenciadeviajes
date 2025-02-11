@@ -1,0 +1,26 @@
+extends ./layout/index
+
+block contenido
+    main.container.mt-5
+        h1.text-center.mt-5 #{pagina}
+
+        blockquote.text-center Lee sobre nuestros clientes y sus experiencias
+
+        include ./layout/layout_testimonio
+
+        .row.justify-content-center
+            .col-md-8
+                form(action="/testimonios" method="POST")
+                    .form-group
+                        label(for="nombre", style="font-weight: bold;") Nombre:
+                        input#nombre.form-control(type="text", name="nombre", placeholder="Tu nombre", required, value=nombre || '')
+
+                    .form-group
+                        label(for="correoelectronico", style="font-weight: bold;") Correo Electrónico:
+                        input#correoelectronico.form-control(type="email", name="correoelectronico", placeholder="Tu correo electrónico", value=correoelectronico || '')
+
+                    .form-group
+                        label(for="mensaje", style="font-weight: bold;") Mensaje:
+                        textarea#mensaje.form-control(name="mensaje", placeholder="Tu mensaje", rows="3", required) #{mensaje || ''}
+
+                    input.btn.btn-danger.btn-block(type="submit", value="Enviar Testimonio")
