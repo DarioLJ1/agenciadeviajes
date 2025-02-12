@@ -1,6 +1,6 @@
 .row.proximos-viajes
     each viaje in viajes
-        .col-md-6.col-lg-4.mb-4
+        .col-md-6.col-lg-4.mb-4(data-fecha=`${viaje.fecha_ida} - ${viaje.fecha_vuelta}`)
             .card
                 img.card-img-top(src=`/img/destinos_${viaje.imagen}.jpg`, alt=`Imagen de ${viaje.titulo}`)
                 .card-body
@@ -27,3 +27,7 @@
                         span #{viaje.disponible} Disponibles
                     p= viaje.descripcion.length > 100 ? viaje.descripcion.substring(0, 100) + '...' : viaje.descripcion
                     a(href=`/viajes/${viaje.slug}`, class="btn btn-success btn-block") Más Información
+
+
+
+

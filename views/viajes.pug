@@ -1,7 +1,26 @@
 extends ./layout/index
 
 block contenido
-    h1= pagina
     main.container.mt-5
-        include ./layout/layout_viajes
+        h1.text-center= pagina
 
+        .row.mb-5
+            .col-md-12
+                form#searchForm.card.card-body
+                    .row
+                        .col-md-4.mb-3
+                            label.form-label(for="destino") Destino:
+                            input#destino.form-control(type="text", name="destino", placeholder="Buscar por destino")
+                        .col-md-3.mb-3
+                            label.form-label(for="fechaInicio") Fecha de inicio:
+                            input#fechaInicio.form-control(type="date", name="fechaInicio")
+                        .col-md-3.mb-3
+                            label.form-label(for="fechaFin") Fecha de fin:
+                            input#fechaFin.form-control(type="date", name="fechaFin")
+                        .col-md-2.mb-3.d-flex.align-items-end
+                            button#buscarBtn.btn.btn-primary.w-100(type="button") Buscar
+
+        #resultados
+            include ./layout/layout_viajes
+
+    script(src="/js/search-filter.js")
