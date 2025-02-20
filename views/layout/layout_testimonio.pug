@@ -1,8 +1,17 @@
 .row.testimonios
-    each testimonio in testimonios
-        .col-md-6.col-lg-4.mb-4
-            .card.shadow-lg.border-light
-                .card-body
-                    blockquote
-                        p.mb-0.text-center= testimonio.mensaje
-                    footer.blockquote-footer.text-end= `- ${testimonio.nombre}`
+    if testimonios && testimonios.length
+        each testimonio in testimonios
+            .col-md-6.col-lg-4.mb-4
+                .card.shadow-lg.border-light
+                    .card-body
+                        blockquote.blockquote
+                            p.mb-0
+                                i.fas.fa-quote-left.text-primary.mr-2
+                                = testimonio.mensaje
+                            footer.blockquote-footer
+                                = testimonio.nombre
+                                cite.ml-2= testimonio.correoelectronico
+    else
+        .col-md-12
+            .alert.alert-info
+                p.text-center No hay testimonios disponibles

@@ -1,19 +1,24 @@
-import Sequelize from "sequelize";
-import db from "../config/db.js";
+import Sequelize from "sequelize"
+import db from "../config/db.js"
 
-export const Testimonial = db.define("testimoniales", {
-    nombre: {
-        type: Sequelize.STRING
+export const Testimonial = db.define(
+    "testimoniales",
+    {
+        nombre: {
+            type: Sequelize.STRING,
+        },
+        correoelectronico: {
+            type: Sequelize.STRING,
+            allowNull: true,
+        },
+        mensaje: {
+            type: Sequelize.STRING,
+        },
     },
-    correoelectronico: {
-        type: Sequelize.STRING,
-        allowNull: true
+    {
+        timestamps: false,
     },
-    mensaje: {
-        type: Sequelize.STRING
-    }
-}, {
-    timestamps: false
-});
+)
+
 
 

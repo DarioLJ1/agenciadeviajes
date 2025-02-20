@@ -1,32 +1,20 @@
 .row.proximos-viajes
     each viaje in viajes
         .col-md-6.col-lg-4.mb-4(data-fecha=`${viaje.fecha_ida} - ${viaje.fecha_vuelta}`)
-            .card
+            .card.shadow-sm
                 img.card-img-top(src=`/img/destinos_${viaje.imagen}.jpg`, alt=`Imagen de ${viaje.titulo}`)
                 .card-body
-                    h2= viaje.titulo
-                    p
-                        svg(xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' width='24' height='24' stroke-width='2' aria-hidden="true")
-                            path(d='M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z')
-                            path(d='M16 3v4')
-                            path(d='M8 3v4')
-                            path(d='M4 11h16')
-                            path(d='M7 14h.013')
-                            path(d='M10.01 14h.005')
-                            path(d='M13.01 14h.005')
-                            path(d='M16.015 14h.005')
-                            path(d='M13.015 17h.005')
-                            path(d='M7.01 17h.005')
-                            path(d='M10.01 17h.005')
-                        span #{viaje.fecha_ida} - #{viaje.fecha_vuelta}
-                    p
-                        svg(xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' width='24' height='24' stroke-width='2' aria-hidden="true")
-                            path(d='M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0')
-                            path(d='M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0')
-                            path(d='M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855')
-                        span #{viaje.disponible} Disponibles
-                    p= viaje.descripcion.length > 100 ? viaje.descripcion.substring(0, 100) + '...' : viaje.descripcion
-                    a(href=`/viajes/${viaje.slug}`, class="btn btn-success btn-block") Más Información
+                    h2.card-title.h5= viaje.titulo
+                    p.mb-2
+                        i.fas.fa-calendar-alt.text-primary.me-2
+                        | #{viaje.fecha_ida} - #{viaje.fecha_vuelta}
+                    p.mb-2
+                        i.fas.fa-dollar-sign.text-primary.me-2
+                        | #{viaje.precio} euros
+                    p.card-text= viaje.descripcion.substr(0, 100) + '...'
+                    a.btn.btn-primary.w-100(href=`/viaje/${viaje.slug}`)
+                        i.fas.fa-info-circle.me-2
+                        | Más Información
 
 
 

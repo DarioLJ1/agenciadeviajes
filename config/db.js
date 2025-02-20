@@ -1,21 +1,22 @@
-import Sequalice from 'sequelize'
-import dotenv from 'dotenv';
+import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
 dotenv.config();
 
-
-const db = new Sequalice(process.env.CONEXION, {
-
-    define : {
-        timestamp : false
+const db = new Sequelize(process.env.CONEXION, {
+    define: {
+        timestamps: false,
     },
-    pool : {
-
+    pool: {
         max: 5,
         min: 0,
-        acquire : 30000,
-        idle : 10000
-
+        acquire: 30000,
+        idle: 10000,
     },
-
+    dialectOptions: {
+        ssl: {
+            rejectUnauthorized: false,
+        },
+    },
 });
+
 export default db;

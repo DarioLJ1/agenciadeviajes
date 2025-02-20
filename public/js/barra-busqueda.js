@@ -9,8 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const fechaInicio = document.getElementById("fechaInicio").value
     const fechaFin = document.getElementById("fechaFin").value
 
-    console.log("Búsqueda iniciada:", { destino, fechaInicio, fechaFin })
-
     let viajesEncontrados = 0
 
     viajesOriginales.forEach((viaje) => {
@@ -18,13 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const fechaViaje = viaje.dataset.fecha
       const [fechaIda, fechaVuelta] = fechaViaje.split(" - ")
 
-      console.log("Evaluando viaje:", { titulo, fechaIda, fechaVuelta })
-
       const cumpleDestino = destino === "" || titulo.includes(destino)
       const cumpleFechas =
           (fechaInicio === "" || fechaIda >= fechaInicio) && (fechaFin === "" || fechaVuelta <= fechaFin)
-
-      console.log("Resultado de evaluación:", { cumpleDestino, cumpleFechas })
 
       if (cumpleDestino && cumpleFechas) {
         viaje.classList.remove("oculto")
@@ -36,20 +30,16 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     })
 
-    console.log("Total de viajes encontrados:", viajesEncontrados)
-
+    const mensajeNoResultados = resultados.querySelector(".no-resultados")
     if (viajesEncontrados === 0) {
-      if (!resultados.querySelector(".no-resultados")) {
+      if (!mensajeNoResultados) {
         const mensaje = document.createElement("p")
         mensaje.textContent = "No se encontraron viajes que coincidan con tu búsqueda."
         mensaje.classList.add("text-center", "no-resultados")
         resultados.appendChild(mensaje)
       }
-    } else {
-      const mensajeNoResultados = resultados.querySelector(".no-resultados")
-      if (mensajeNoResultados) {
-        mensajeNoResultados.remove()
-      }
+    } else if (mensajeNoResultados) {
+      mensajeNoResultados.remove()
     }
   })
 })

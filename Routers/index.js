@@ -1,22 +1,24 @@
-import express from 'express';
+import express from "express"
 import {
     paginaInicio,
     paginaNosotros,
-    paginaTestimonios,
     paginaViajes,
-    paginaDetallesViajes, // Aquí la estás importando
-    guardarTestimonios
-} from "../controlers/paginaController.js";
+    paginaDetallesViajes,
+    paginaTestimoniales,
+    guardarTestimonios,
+    editarTestimonio,
+    eliminarTestimonio,
+} from "../controllers/paginaController.js"
 
-const router = express.Router();
+const router = express.Router()
 
-router.get('/', paginaInicio);
-router.get('/nosotros', paginaNosotros);
-router.get('/testimonios', paginaTestimonios);
-router.get('/viajes', paginaViajes);
-router.get('/viajes/:slug', paginaDetallesViajes); // Aquí usas la función en la ruta
+router.get("/", paginaInicio)
+router.get("/nosotros", paginaNosotros)
+router.get("/viajes", paginaViajes)
+router.get("/viaje/:slug", paginaDetallesViajes)
+router.get("/testimonios", paginaTestimoniales) // Cambiado de testimoniales a testimonios
+router.post("/testimonios", guardarTestimonios) // Cambiado de testimoniales a testimonios
+router.post("/testimonios/:id/editar", editarTestimonio)
+router.post("/testimonios/:id/eliminar", eliminarTestimonio)
 
-router.post('/testimonios', guardarTestimonios);
-
-export default router;
-
+export default router

@@ -2,25 +2,37 @@ extends ./layout/index
 
 block contenido
     main.container.mt-5
-        h1.text-center= pagina
+        h1.text-center.mb-5= pagina
 
+        // Agregamos el formulario de búsqueda
         .row.mb-5
             .col-md-12
-                form#searchForm.card.card-body
+                form#searchForm.bg-white.p-4.shadow.rounded
                     .row
                         .col-md-4.mb-3
-                            label.form-label(for="destino") Destino:
-                            input#destino.form-control(type="text", name="destino", placeholder="Buscar por destino")
-                        .col-md-3.mb-3
-                            label.form-label(for="fechaInicio") Fecha de inicio:
-                            input#fechaInicio.form-control(type="date", name="fechaInicio")
-                        .col-md-3.mb-3
-                            label.form-label(for="fechaFin") Fecha de fin:
-                            input#fechaFin.form-control(type="date", name="fechaFin")
-                        .col-md-2.mb-3.d-flex.align-items-end
-                            button#buscarBtn.btn.btn-primary.w-100(type="button") Buscar
+                            label.form-label(for="destino") Destino
+                            .input-group
+                                input#destino.form-control(type="text" placeholder="¿A dónde quieres ir?")
+
+                        .col-md-4.mb-3
+                            label.form-label(for="fechaInicio") Fecha Ida
+                            .input-group
+                                input#fechaInicio.form-control(type="date")
+
+                        .col-md-4.mb-3
+                            label.form-label(for="fechaFin") Fecha Vuelta
+                            .input-group
+                                input#fechaFin.form-control(type="date")
+
+                    .row
+                        .col-md-12.text-center
+                            button#buscarBtn.btn.btn-primary.px-5(type="button")
+                                i.fas.fa-search.me-2
+                                | Buscar Viajes
 
         #resultados
-            include ./layout/layout_viajes
+            include layout/layout_viajes
 
-    script(src="/js/search-filter.js")
+block scripts
+    script(src="/js/barra-busqueda.js")
+

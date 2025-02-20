@@ -6,7 +6,31 @@ block contenido
 
         blockquote.text-center Lee sobre nuestros clientes y sus experiencias
 
-        include ./layout/layout_testimonio
+        .row.testimonios
+            if testimonios && testimonios.length
+                each testimonio in testimonios
+                    .col-md-6.col-lg-4.mb-4
+                        .card.shadow-lg.border-light
+                            .card-body
+                                blockquote.blockquote
+                                    p.mb-0
+                                        i.fas.fa-quote-left.text-primary.mr-2
+                                        = testimonio.mensaje
+                                    footer.blockquote-footer
+                                        = testimonio.nombre
+                                        cite.ml-2= testimonio.correoelectronico
+                                .mt-3.d-flex.justify-content-between
+                                    button.btn.btn-primary.btn-sm(onclick=`editarTestimonioModal(${JSON.stringify(testimonio)})`)
+                                        i.fas.fa-edit.me-2
+                                        | Editar
+                                    form(action=`/testimonios/${testimonio.id}/eliminar` method="POST" style="display: inline;")
+                                        button.btn.btn-danger.btn-sm(type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar este testimonio?')")
+                                            i.fas.fa-trash.me-2
+                                            | Eliminar
+            else
+                .col-md-12
+                    .alert.alert-info
+                        p.text-center No hay testimonios disponibles
 
         .row.justify-content-center
             .col-md-8
@@ -23,4 +47,43 @@ block contenido
                         label(for="mensaje", style="font-weight: bold;") Mensaje:
                         textarea#mensaje.form-control(name="mensaje", placeholder="Tu mensaje", rows="3", required) #{mensaje || ''}
 
-                    input.btn.btn-danger.btn-block(type="submit", value="Enviar Testimonio")
+                    input.btn.btn-danger.btn-block.mt-3(type="submit", value="Enviar Testimonio")
+
+        // Modal para editar testimonio
+        #editarTestimonioModal.modal.fade(tabindex="-1")
+            .modal-dialog
+                .modal-content
+                    .modal-header
+                        h5.modal-title Editar Testimonio
+                        button.btn-close(type="button" data-bs-dismiss="modal")
+                    .modal-body
+                        form#editarTestimonioForm(method="POST")
+                            .form-group
+                                label(for="editNombre") Nombre:
+                                input#editNombre.form-control(type="text" name="nombre" required)
+                            .form-group
+                                label(for="editCorreo") Correo Electrónico:
+                                input#editCorreo.form-control(type="email" name="correoelectronico")
+                            .form-group
+                                label(for="editMensaje") Mensaje:
+                                textarea#editMensaje.form-control(name="mensaje" rows="3" required)
+                    .modal-footer
+                        button.btn.btn-secondary(type="button" data-bs-dismiss="modal") Cancelar
+                        button.btn.btn-primary(type="submit" form="editarTestimonioForm") Guardar cambios
+
+block scripts
+    script.
+        function editarTestimonioModal(testimonio) {
+            const modal = new bootstrap.Modal(document.getElementById('editarTestimonioModal'))
+            const form = document.getElementById('editarTestimonioForm')
+
+            // Rellenar el formulario con los datos actuales
+            document.getElementById('editNombre').value = testimonio.nombre
+            document.getElementById('editCorreo').value = testimonio.correoelectronico
+            document.getElementById('editMensaje').value = testimonio.mensaje
+
+            // Actualizar la acción del formulario
+            form.action = `/testimonios/${testimonio.id}/editar`
+
+            modal.show()
+        }
