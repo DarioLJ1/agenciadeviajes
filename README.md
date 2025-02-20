@@ -26,3 +26,7 @@ Si no cumple, lo oculto con la clase "oculto".
 Cuento la cantidad de viajes encontrados.
 Para el mensaje "no se encontraron resultados" :
 Si no encuentro ningún viaje añado un mensaje indicando que no hay coincidencias.
+
+Otra modificación:
+
+He añadio dos botones para editar y eliminar testimonios, para darle mas uso a la base de datos.
